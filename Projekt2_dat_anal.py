@@ -14,7 +14,13 @@ print("I've generated a random 4 digit number for you.\n"
       "Let's play a bulls and cows game.")
 print(oddelovac)
 # Generování tajného čísla
-secret_number = random.sample(range(1, 10), 4)
+# První číslice musí být mezi 1 a 9 (aby nezačínala nulou)
+first_digit = random.choice(range(1, 10))
+# Zbývající číslice mohou být libovolné mezi 0 a 9
+other_digits = random.sample(range(0, 10), 3)
+# Spojení první číslice s ostatními
+secret_number = [first_digit] + other_digits
+print(secret_number)
 sn = "".join(str(number) for number in secret_number)
 print(sn) #Náhodně vygenerované číslo k otestování
 
@@ -26,8 +32,8 @@ def is_valid_input(user_choice):
     elif len(user_choice) != 4:
         print("Your number doesn't include 4 digits.")
         return False
-    elif "0" in user_choice:
-        print("Zero not allowed in your number.")
+    elif user_choice.startswith("0"):
+        print("Your number can't start with zero.")
         return False
     elif len(user_choice) != len(set(user_choice)):
         print("Your digits must be unique.")
@@ -54,7 +60,7 @@ while True:
     user_choice = input(">>>  ")
     print(oddelovac := "-" * 48)
 
-    if not is_valid_input(user_choice):
+    if not is_valid_input(user_choice): #pokud je podmínka True, smyčka se pustí znovu
         continue
 
     guess_num += 1
