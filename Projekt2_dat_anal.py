@@ -20,7 +20,6 @@ first_digit = random.choice(range(1, 10))
 other_digits = random.sample(range(0, 10), 3)
 # Spojení první číslice s ostatními
 secret_number = [first_digit] + other_digits
-print(secret_number)
 sn = "".join(str(number) for number in secret_number)
 print(sn) #Náhodně vygenerované číslo k otestování
 
